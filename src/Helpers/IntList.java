@@ -39,7 +39,7 @@ public class IntList extends ArrayList<Integer>{
     public IntList getNumbersThatAddTo(int n, int target) {
         boolean found = false;
 
-        MultiDimIndex i = new MultiDimIndex(n, this.size(), true);
+        MultiDimIndexDistinct i = new MultiDimIndexDistinct(n, this.size());
         IntList numbers = new IntList();
 
         while(!(found | i.isMax())) {

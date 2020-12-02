@@ -17,7 +17,7 @@ public class code {
     }
 
     static void test() {
-        MultiDimIndex i = new MultiDimIndex(1, 200, true);
+        MultiDimIndexDistinct i = new MultiDimIndexDistinct(3, 5);
         while(!i.isMax()) {
             i.print();
             i.iterateForward();
@@ -30,7 +30,7 @@ public class code {
 
         IntList numbers = new IntList((ArrayList<String>) Files.readAllLines(path, ENCODING));
         long solution1 = numbers.getNumbersThatAddTo(2, 2020).product();
-        long solution2 = numbers.getNumbersThatAddTo(1, 2020).product();
+        long solution2 = numbers.getNumbersThatAddTo(3, 2020).product();
 
         System.out.println("Solutions: " + solution1 + ", " + solution2);
     }

@@ -1,20 +1,16 @@
 package Helpers;
 
-import java.util.ArrayList;
-
 
 //REFACTOR THIS INTO AN INTERFACE AND SEPERATE IMPLEMENTATIONS FOR OVERLAP AND NO OVERLAP
 public class MultiDimIndex {
     int[] i;
-    final int DIMENSION;
-    final boolean OVERLAP;
+    final int LENGTH;
     final int MAXINDEX;
 
-    public MultiDimIndex(int dimension, int maxIndex, boolean overlap) {
-        this.DIMENSION = dimension;
-        this.OVERLAP = overlap;
+    public MultiDimIndex(int length, int maxIndex) {
+        this.LENGTH = length;
         this.MAXINDEX = maxIndex;
-        i = new int[dimension];
+        i = new int[LENGTH];
         initialise();
     }
 
@@ -23,19 +19,14 @@ public class MultiDimIndex {
     }
 
     private void initialise() {
-        for (int j = 0; j < DIMENSION; j++) {
-            if (OVERLAP) {
-                i[j] = 0;
-            }
-            else {
-                i[j] = j;
-            }
+        for (int j = 0; j < LENGTH; j++) {
+            i[j] = 0;
         }
     }
 
     public void print() {
         String out = "[";
-        for(int j = 0; j < DIMENSION; j++) {
+        for(int j = 0; j < LENGTH; j++) {
             if(j > 0) {
                 out += ", ";
             }
@@ -46,29 +37,8 @@ public class MultiDimIndex {
     }
 
     public void iterateForward() {
-        if (OVERLAP) iterateForwardWithOverlap();
-        else iterateForwardWithoutOverlap();
-    }
-
-
-
-    private void iterateForwardWithoutOverlap() {
-        // IMPLEMENTATION IS REAL HARD ;_;
-    }
-
-    public boolean hasDuplicate() {
-        boolean hasDuplicate = false;
-        ArrayList<Integer> seenDigits = new ArrayList();
-        for (int j = 0; j < DIMENSION; j++) {
-            if(seenDigits.contains(i[j])) return true;
-            else seenDigits.add(i[j]);
-        }
-        return false;
-    }
-
-    private void iterateForwardWithOverlap() {
-        i[DIMENSION - 1]++;
-        int j = DIMENSION - 1;
+        i[LENGTH - 1]++;
+        int j = LENGTH - 1;
         while(j >= 0) {
             if(i[j] == MAXINDEX) {
                 i[j] = 0;
@@ -80,19 +50,19 @@ public class MultiDimIndex {
         }
     }
 
-    public boolean isZero() {
-        boolean isZero = true;
-        for(int j = 0; j < DIMENSION; j++) {
+    public boolean isMin() {
+        boolean isMin = true;
+        for(int j = 0; j < LENGTH; j++) {
             if(i[j] != 0) {
-                isZero = false;
+                isMin = false;
             }
         }
-        return isZero;
+        return isMin;
     }
 
     public boolean isMax() {
         boolean isMax = true;
-        for(int j = 0; j < DIMENSION; j++) {
+        for(int j = 0; j < LENGTH; j++) {
             if(i[j] != MAXINDEX - 1) {
                 isMax = false;
             }
@@ -100,7 +70,5 @@ public class MultiDimIndex {
         return isMax;
     }
 
-    public int length() {
-        return DIMENSION;
-    }
+    public int length() { return LENGTH; }
 }
