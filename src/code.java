@@ -13,6 +13,15 @@ public class code {
 
     public static void main(String[] args) throws IOException {
         reportRepair();
+        //test();
+    }
+
+    static void test() {
+        MultiDimIndex i = new MultiDimIndex(1, 200, true);
+        while(!i.isMax()) {
+            i.print();
+            i.iterateForward();
+        }
     }
 
     static void reportRepair() throws IOException { //Day one

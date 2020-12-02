@@ -2,6 +2,8 @@ package Helpers;
 
 import java.util.ArrayList;
 
+
+//REFACTOR THIS INTO AN INTERFACE AND SEPERATE IMPLEMENTATIONS FOR OVERLAP AND NO OVERLAP
 public class MultiDimIndex {
     int[] i;
     final int DIMENSION;
@@ -86,6 +88,16 @@ public class MultiDimIndex {
             }
         }
         return isZero;
+    }
+
+    public boolean isMax() {
+        boolean isMax = true;
+        for(int j = 0; j < DIMENSION; j++) {
+            if(i[j] != MAXINDEX - 1) {
+                isMax = false;
+            }
+        }
+        return isMax;
     }
 
     public int length() {

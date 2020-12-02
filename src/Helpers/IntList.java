@@ -42,7 +42,7 @@ public class IntList extends ArrayList<Integer>{
         MultiDimIndex i = new MultiDimIndex(n, this.size(), true);
         IntList numbers = new IntList();
 
-        while(!found) {
+        while(!(found | i.isMax())) {
             if(this.sum(i) == target) {
                 for(int j = 0; j < i.length(); j++) {
                     numbers.add(this.get(i.getIndex(j)));
