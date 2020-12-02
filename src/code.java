@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -12,16 +13,33 @@ public class code {
     final static Charset ENCODING = StandardCharsets.UTF_8;
 
     public static void main(String[] args) throws IOException {
-        reportRepair();
+        //reportRepair();
+        validatePasswords();
         //test();
     }
 
     static void test() {
-        MultiDimIndexDistinct i = new MultiDimIndexDistinct(3, 5);
-        while(!i.isMax()) {
-            i.print();
-            i.iterateForward();
+        Password p = new Password("1-3 b: cdefg");
+        System.out.println(p.isValid(1));
+    }
+
+    static void validatePasswords() throws  IOException { //Day two
+        String fileName = "src/Data/Day_2/input.txt";
+        Path path = Paths.get(fileName);
+
+        ArrayList<String> policyPasswords = (ArrayList<String>) Files.readAllLines(path, ENCODING);
+
+        int count0 = 0;
+        int count1 = 0;
+        for (String p : policyPasswords) {
+            if ((new Password(p).isValid(0))) {
+                count0++;
+            }
+            if ((new Password(p).isValid(1))) {
+                count1++;
+            }
         }
+        System.out.println(count0 + ", " + count1);
     }
 
     static void reportRepair() throws IOException { //Day one
