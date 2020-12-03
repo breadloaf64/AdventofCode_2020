@@ -3,11 +3,6 @@ package Days;
 import Helpers.InputHandler;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Day3 {
@@ -29,13 +24,9 @@ public class Day3 {
     }
 
     static int treeCount(ArrayList<String> map, int di, int dj) {
-        int width = map.get(0).length();
-        int treeCount = 0;
-        int j = 0;
+        int width = map.get(0).length(), treeCount = 0, j = 0;
         for (int i = 0; i < map.size(); i += di) {
-            if(map.get(i).charAt(j) == '#') {
-                treeCount++;
-            }
+            if(map.get(i).charAt(j) == '#') treeCount++;
             j = (j + dj) % width;
         }
         return treeCount;

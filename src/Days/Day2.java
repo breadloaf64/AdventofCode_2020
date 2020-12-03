@@ -1,5 +1,6 @@
 package Days;
 
+import Helpers.InputHandler;
 import Helpers.Password;
 
 import java.io.IOException;
@@ -12,14 +13,12 @@ import java.util.ArrayList;
 
 public class Day2 {
     public static void solve() throws IOException {
-        validatePasswords();
+        ArrayList<String> input = InputHandler.get("src/Data/Day_2/input.txt");
+        validatePasswords(input);
     }
 
-    static void validatePasswords() throws  IOException { //Day 2
-        final Charset ENCODING = StandardCharsets.UTF_8;
-        String fileName = "src/Data/Day_2/input.txt";
-        Path path = Paths.get(fileName);
-        ArrayList<String> policyPasswords = (ArrayList<String>) Files.readAllLines(path, ENCODING);
+    static void validatePasswords(ArrayList<String> input) throws  IOException { //Day 2
+        ArrayList<String> policyPasswords = input;
 
         int count0 = 0;
         int count1 = 0;
