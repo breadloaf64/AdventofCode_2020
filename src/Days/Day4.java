@@ -2,6 +2,7 @@ package Days;
 
 import Helpers.InputHandler;
 import Helpers.Regex;
+import Helpers.StringList;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class Day4 {
         ArrayList<String> input = InputHandler.get("src/Data/Day_4/input.txt");
         //test(input);
         int validCount = 0, validCountStrict = 0;
-        ArrayList<String> passports = collectLines(input);
+        ArrayList<String> passports = StringList.collectLines(input, " ");
         for (String p : passports) {
             if(passportValid(p, false)) validCount++;
             if(passportValid(p, true)) validCountStrict++;
@@ -118,20 +119,5 @@ public class Day4 {
         if (strUnit.contains("cm") && 150 <= hgt && hgt <= 195) return true;
         else if (strUnit.contains("in") && 59 <= hgt && hgt <= 76) return true;
         else return false;
-    }
-
-
-    private static ArrayList<String> collectLines(ArrayList<String> input) {
-        int j = 0;
-        ArrayList<String> collected = new ArrayList();
-        collected.add("");
-        for (String s : input) {
-            if(s.length() == 0) {
-                j++;
-                collected.add("");
-            }
-            else collected.set(j, collected.get(j) + " " + s) ;
-        }
-        return collected;
     }
 }
