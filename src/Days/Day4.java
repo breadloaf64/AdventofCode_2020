@@ -19,7 +19,7 @@ public class Day4 {
             if(passportValid(p, false)) validCount++;
             if(passportValid(p, true)) validCountStrict++;
         }
-        System.out.println(validCount + ", " + validCountStrict);
+        System.out.println("Day 4: " + validCount + ", " + validCountStrict);
     }
 
     private static void test(ArrayList<String> input) {

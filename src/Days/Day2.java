@@ -30,6 +30,6 @@ public class Day2 {
                 count1++;
             }
         }
-        System.out.println(count0 + ", " + count1);
+        System.out.println("Day 2: " + count0 + ", " + count1);
     }
 }

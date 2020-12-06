@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Day6 {
     public static void solve() throws IOException {
         ArrayList<String> input = InputHandler.get("src/Data/Day_6/input.txt");
-        System.out.println(totalGroupYessesOR(input) + ", " + totalGroupYessesAND(input));
+        System.out.println("Day 6: " + totalGroupYessesOR(input) + ", " + totalGroupYessesAND(input));
     }
 
     private static int totalGroupYessesOR(ArrayList<String> input) {

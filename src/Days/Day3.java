@@ -20,7 +20,7 @@ public class Day3 {
         product *= treeCount(map, 1, 5);
         product *= treeCount(map, 1, 7);
         product *= treeCount(map, 2, 1);
-        System.out.println("Solutions: " + treeCount(map, 1, 3) + ", " + product);
+        System.out.println("Day 3: " + treeCount(map, 1, 3) + ", " + product);
     }
 
     static int treeCount(ArrayList<String> map, int di, int dj) {

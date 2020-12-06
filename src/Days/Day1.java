@@ -22,6 +22,6 @@ public class Day1 {
         IntList numbers = new IntList(input);
         long solution1 = numbers.getNumbersThatAddTo(2, 2020).product();
         long solution2 = numbers.getNumbersThatAddTo(3, 2020).product();
-        System.out.println("Solutions: " + solution1 + ", " + solution2);
+        System.out.println("Day 1: " + solution1 + ", " + solution2);
     }
 }

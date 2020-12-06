@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Day5 {
     public static void solve() throws IOException {
         ArrayList<String> input = InputHandler.get("src/Data/Day_5/input.txt");
-        System.out.println(highestPass(input) + ", " + remainingPass(input));
+        System.out.println("Day 5: " + highestPass(input) + ", " + remainingPass(input));
     }
 
     private static int remainingPass(ArrayList<String> passes) {
