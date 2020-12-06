@@ -14,7 +14,8 @@ public class StringList {
                 j++;
                 collected.add("");
             }
-            else collected.set(j, collected.get(j) + delimiter + s);
+            else if (collected.get(j) != "") collected.set(j, collected.get(j) + delimiter + s);
+            else collected.set(j, s);
         }
         return collected;
     }

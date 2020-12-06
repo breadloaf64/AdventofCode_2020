@@ -1,6 +1,7 @@
 package Days;
 
 import Helpers.InputHandler;
+import Helpers.Printer;
 import Helpers.StringList;
 
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class Day6 {
 
     private static int groupYessesAND(String g) {
         int groupYesses = 0;
-        int groupSize = StringList.countOccurences(g, ';');
+        int groupSize = StringList.countOccurences(g, ';') + 1;
         ArrayList<Character> uniqueCharacters = StringList.uniqueCharacters(g);
         for (Character c : uniqueCharacters) {
             if (c != ';' && StringList.countOccurences(g, c) == groupSize) groupYesses++;
