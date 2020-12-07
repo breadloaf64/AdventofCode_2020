@@ -3,17 +3,44 @@ package Days;
 import Helpers.InputHandler;
 import Helpers.Printer;
 import Helpers.StringList;
+import Helpers.Tuple;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Objects;
 
 public class Day7 {
 
     public static void solve() throws IOException {
         ArrayList<String> input = InputHandler.get("src/Data/Day_7/input.txt");
-        System.out.println(countValidOuterBag(input, "shiny gold bag"));
+        //System.out.println(countValidOuterBag(input, "shiny gold bag"));
+        System.out.println(countTotalInnerBags(input, "shiny gold bag"));
         //test(input);
+        //ruleInnerBagsCount("dark violet bags contain no other bags.");
+        //System.out.println("");
+    }
+
+    private static int countTotalInnerBags(ArrayList<String> rules, String myBag) {
+        int count = -1;
+        LinkedList<String> bags = new LinkedList();
+        bags.add(myBag);
+        while(bags.size() > 0) {
+            count++;
+            String current = bags.remove();
+            for(String rule : rules) {
+                if (Objects.equals(ruleOuterBag(rule), current)) {
+                    ArrayList<Tuple<String, Integer>> innerBagsCount = ruleInnerBagsCount(rule);
+                    for (Tuple<String, Integer> bagCount : innerBagsCount) {
+                        for (int i = 0; i < bagCount.y; i++) {
+                            bags.add(bagCount.x);
+                        }
+                    }
+                }
+            }
+        }
+        return count;
     }
 
     private static int countValidOuterBag(ArrayList<String> rules, String myBag) {
@@ -71,6 +98,26 @@ public class Day7 {
             innerBags.set(i, strip(innerBags.get(i)));
         }
         return innerBags;
+    }
+
+    private static ArrayList<Tuple<String, Integer>> ruleInnerBagsCount(String rule) {
+        ArrayList<Tuple<String, Integer>> innerBagsCount = new ArrayList();
+        ArrayList<String> innerBags = new ArrayList();
+        String inner = rule.split("s contain ")[1];
+        Collections.addAll(innerBags, inner.split(", "));
+
+        String innerBag;
+        Integer count;
+        String strCount;
+
+        for (int i = 0; i < innerBags.size(); i++) {
+            innerBag = strip(innerBags.get(i));
+            strCount = innerBags.get(i).split(" ")[0];
+            if (Objects.equals(strCount, "no")) count = 0;
+            else count = Integer.parseInt(strCount);
+            innerBagsCount.add(new Tuple<String, Integer>(innerBag, count));
+        }
+        return innerBagsCount;
     }
 
     private static String strip(String bag) {
