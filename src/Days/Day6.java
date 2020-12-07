@@ -1,7 +1,6 @@
 package Days;
 
 import Helpers.InputHandler;
-import Helpers.Printer;
 import Helpers.StringList;
 
 import java.io.IOException;

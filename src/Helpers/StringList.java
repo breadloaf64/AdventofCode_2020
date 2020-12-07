@@ -49,4 +49,11 @@ public class StringList {
         }
         return uniqueCharacters;
     }
+
+    public static String removeLastCharacter(String input, char toBeRemoved) {
+        if(input.charAt(input.length() - 1) == toBeRemoved) {
+            return input.substring(0, input.length() - 1);
+        }
+        return input;
+    }
 }
