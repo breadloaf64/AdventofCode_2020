@@ -18,8 +18,7 @@ public class Day7 {
         //System.out.println(countValidOuterBag(input, "shiny gold bag"));
         System.out.println(countTotalInnerBags(input, "shiny gold bag"));
         //test(input);
-        //ruleInnerBagsCount("dark violet bags contain no other bags.");
-        //System.out.println("");
+
     }
 
     private static int countTotalInnerBags(ArrayList<String> rules, String myBag) {
@@ -130,7 +129,8 @@ public class Day7 {
     }
 
     private static void test(ArrayList<String> input) {
-
+        ruleInnerBagsCount("dark violet bags contain no other bags.");
+        System.out.println("");
     }
 
 }
