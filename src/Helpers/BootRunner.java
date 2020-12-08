@@ -9,6 +9,7 @@ public class BootRunner {
     ArrayList<String> program;
     boolean[] lineVisited;
     boolean hasLooped;
+    boolean terminated;
 
     public BootRunner(ArrayList<String> program) {
         this.program = program;
@@ -32,17 +33,20 @@ public class BootRunner {
             acc += arg;
             pc++;
         }
-        if (lineVisited[pc]) hasLooped = true;
+        if(pc >= program.size()) terminated = true;
+        if (!terminated && lineVisited[pc]) hasLooped = true;
     }
 
     public int acc() {return acc;}
     public boolean hasLooped() {return hasLooped;}
     public int pc() {return pc;}
+    public boolean terminated() {return terminated;}
     public void printState() {
         System.out.println("=====================");
         System.out.println("PC: " + pc);
         System.out.println("ACC: " + acc);
-        System.out.println("nextInstruction: " + program.get(pc));
+        if (pc < program.size()) System.out.println("nextInstruction: " + program.get(pc));
+        else System.out.println("END OF PROGRAM");
         System.out.println("");
     }
 
