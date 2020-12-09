@@ -5,7 +5,7 @@ import Days.*;
 public class code {
 
     public static void main(String[] args) throws IOException {
-        Day9.solve();
+        Day4.solve();
         //printAllAnswersAndSolutions();
     }
 

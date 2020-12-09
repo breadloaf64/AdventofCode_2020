@@ -7,7 +7,7 @@ public class Regex {
     public static boolean test(String reg, String input) {
         Pattern pattern = Pattern.compile(reg);
         Matcher matcher = pattern.matcher(input);
-        boolean matchFound = matcher.find();
+        boolean matchFound = matcher.matches();
         if(matchFound) return true;
         else return false;
     }
