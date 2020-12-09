@@ -134,4 +134,8 @@ public class Passport {
         else if (strUnit.contains("in") && 59 <= hgt && hgt <= 76) return true;
         else return false;
     }
+
+    public void print () {
+        System.out.println(data);
+    }
 }

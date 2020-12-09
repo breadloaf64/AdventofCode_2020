@@ -12,7 +12,9 @@ public class Day4 {
         ArrayList<String> input = InputHandler.get("src/Data/Day_4/input.txt");
         //System.out.println("Day 4: " + countValid(input, false) + ", ");
         //test(input);
-        System.out.println(countValidPassports(input).y);
+        System.out.println("");
+        Tuple<Integer, Integer> counts = countValidPassports(input);
+        System.out.println("Day 4: " + counts.x + " " + counts.y);
         //System.out.println(Passport.validateFieldValue("pid", "12sd56789"));
     }
 
@@ -20,9 +22,15 @@ public class Day4 {
         Tuple<Integer, Integer> counts = new Tuple<Integer, Integer>(0, 0);
         ArrayList<String> strPassports = StringList.collectLines(input, " ");
         ArrayList<Passport> passports = makePassports(strPassports);
+        int count = 0;
         for (Passport p : passports) {
             if (p.valid()) counts.x++;
-            if (p.validStrict()) counts.y++;
+            if (p.validStrict()) {
+                count++;
+                counts.y++;
+                //System.out.println(count);
+                p.print();
+            }
         }
         return counts;
     }

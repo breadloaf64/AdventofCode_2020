@@ -56,4 +56,20 @@ public class StringList {
         }
         return input;
     }
+
+    public static ArrayList<Integer> toIntegerList(ArrayList<String> input) {
+        ArrayList<Integer> integers = new ArrayList();
+        for (String s : input) {
+            integers.add(Integer.parseInt(s));
+        }
+        return integers;
+    }
+
+    public static LongList toLongList(ArrayList<String> input) {
+        LongList longs = new LongList();
+        for (String s : input) {
+            longs.add(Long.parseLong(s));
+        }
+        return longs;
+    }
 }

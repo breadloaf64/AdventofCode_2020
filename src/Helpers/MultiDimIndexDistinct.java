@@ -21,6 +21,7 @@ public class MultiDimIndexDistinct extends MultiDimIndex {
         while (!isValid()) {
             super.iterateForward();
         }
+
     }
 
     private boolean isValid() {
@@ -46,11 +47,11 @@ public class MultiDimIndexDistinct extends MultiDimIndex {
 
     public boolean isMin() {
         boolean isMin = true;
-        for(int j = 0; j < LENGTH - 1; j++) {
-            if(j == 0 & i[j] != 0) {
+        for(int j = 0; j < LENGTH; j++) {
+            if(j == 0 && i[j] != 0) {
                 isMin = false;
             }
-            if (j > 0 & i[j] != i[j - 1] + 1) {
+            if (j > 0 && i[j] != i[j - 1] + 1) {
                 isMin = false;
             }
         }

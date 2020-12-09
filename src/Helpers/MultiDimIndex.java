@@ -6,6 +6,7 @@ public class MultiDimIndex {
     int[] i;
     final int LENGTH;
     final int MAXINDEX;
+    boolean hasLooped;
 
     public MultiDimIndex(int length, int maxIndex) {
         this.LENGTH = length;
@@ -48,6 +49,9 @@ public class MultiDimIndex {
             }
             j--;
         }
+        if (this.isMin()) {
+            hasLooped = true;
+        }
     }
 
     public boolean isMin() {
@@ -71,4 +75,5 @@ public class MultiDimIndex {
     }
 
     public int length() { return LENGTH; }
+    public boolean hasLooped() {return hasLooped;}
 }

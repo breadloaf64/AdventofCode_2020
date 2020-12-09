@@ -2,47 +2,47 @@ package Helpers;
 
 import java.util.ArrayList;
 
-public class IntList extends ArrayList<Integer>{
-    public IntList() {
+public class LongList extends ArrayList<Long>{
+    public LongList() {
         super();
     }
 
-    public IntList(ArrayList<String> strings) {
+    public LongList(ArrayList<String> strings) {
         super();
         for(String s : strings) {
-            this.add(Integer.parseInt(s));
+            this.add(Long.parseLong(s));
         }
     }
 
     public void print() {
-        for(Integer i : this) {
+        for(Long i : this) {
             System.out.println(i);
         }
     }
 
     public long sum() {
         long sum = 0;
-        for(Integer i : this) {
+        for(Long i : this) {
             sum += i;
         }
         return sum;
     }
 
     public long sum(MultiDimIndex is) {
-        int sum = 0;
+        Long sum = 0L;
         for(int i = 0; i < is.length(); i++) {
             sum += this.get(is.getIndex(i));
         }
         return sum;
     }
 
-    public IntList getNumbersThatAddTo(int n, int target) {
+    public LongList getNumbersThatAddTo(int n, Long target) {
         boolean found = false;
 
         MultiDimIndexDistinct i = new MultiDimIndexDistinct(n, this.size());
-        IntList numbers = new IntList();
+        LongList numbers = new LongList();
 
-        while(!found && !i.hasLooped()) {
+        while(!found && !i.hasLooped) {
             if(this.sum(i) == target) {
                 for(int j = 0; j < i.length(); j++) {
                     numbers.add(this.get(i.getIndex(j)));
@@ -56,7 +56,7 @@ public class IntList extends ArrayList<Integer>{
 
     public long product() {
         long product = 1;
-        for(Integer i : this) {
+        for(Long i : this) {
             product *= i;
         }
         return product;
