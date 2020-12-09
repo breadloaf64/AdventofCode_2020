@@ -9,9 +9,8 @@ import java.util.LinkedList;
 public class Day9 {
 
     public static void solve() throws IOException {
-        ArrayList<String> input = InputHandler.get("src/Data/Day_9/test.txt");
-        System.out.println(firstException(input, 5));
-        //test(input);
+        ArrayList<String> input = InputHandler.get("src/Data/Day_9/input.txt");
+        System.out.println("Day 9: " + firstException(input, 25) + " " + getEncryptionWeakness(input));
     }
 
     public static Long firstException(ArrayList<String> input, int preambleLength) {
@@ -20,7 +19,6 @@ public class Day9 {
         LongList summands;
         int i = 0;
         for(Long n : data) {
-            System.out.println(n);
             if(i < preambleLength) {
                 preamble.add(n);
             }
@@ -37,12 +35,9 @@ public class Day9 {
         return 0L;
     }
 
-    private static void test(ArrayList<String> input) {
-        MultiDimIndexDistinct i = new MultiDimIndexDistinct(2, 5);
-        while(!i.isMin()) {
-
-            i.print();
-            i.iterateForward();
-        }
+    private static Long getEncryptionWeakness(ArrayList<String> input) {
+        LongList data = StringList.toLongList(input);
+        LongList summands = data.getContigiousNumbersThatAddTo(756008079L);
+        return summands.largest() + summands.smallest();
     }
 }

@@ -54,11 +54,55 @@ public class LongList extends ArrayList<Long>{
         return numbers;
     }
 
+    public LongList getContigiousNumbersThatAddTo(Long target) {
+        boolean found = false;
+        MultiDimIndexDistinct i = new MultiDimIndexDistinct(2, this.size() + 1);
+        LongList numbers = new LongList();
+
+        while(!found && !i.hasLooped) {
+            if(this.sumBetween(i.getIndex(0), i.getIndex(1)) == target) {
+                for(int j = i.getIndex(0); j < i.getIndex(1); j++) {
+                    numbers.add(this.get(j));
+                    found = true;
+                }
+            }
+            i.iterateForward();
+        }
+
+        return numbers;
+    }
+
+    public long sumBetween(int i, int j) {
+        long sum = 0L;
+        if (i < 0) i = 0;
+        if (j > this.size()) j = this.size();
+        for (int k = i; k < j; k++) {
+            sum += this.get(k);
+        }
+        return sum;
+    }
+
     public long product() {
         long product = 1;
         for(Long i : this) {
             product *= i;
         }
         return product;
+    }
+
+    public long largest() {
+        Long largest = this.get(0);
+        for (Long n : this) {
+            if (n > largest) largest = n;
+        }
+        return largest;
+    }
+
+    public long smallest() {
+        Long smallest = this.get(0);
+        for (Long n : this) {
+            if (n < smallest) smallest = n;
+        }
+        return smallest;
     }
 }
