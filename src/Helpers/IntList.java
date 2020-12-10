@@ -1,6 +1,7 @@
 package Helpers;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class IntList extends ArrayList<Integer>{
     public IntList() {
@@ -60,5 +61,53 @@ public class IntList extends ArrayList<Integer>{
             product *= i;
         }
         return product;
+    }
+
+    public IntList differences() {
+        IntList differences = new IntList();
+        for (int i = 1; i < this.size(); i++) {
+            differences.add(this.get(i) - this.get(i - 1));
+        }
+        return differences;
+    }
+
+    public void removeDuplicates() {
+        IntList seen = new IntList();
+        int i = 0;
+        Integer n;
+        while (i < this.size()) {
+            n = this.get(i);
+            if(seen.contains(n)) {
+                this.remove(Integer.valueOf(n));
+            }
+            else {
+                seen.add(n);
+                i++;
+            }
+        }
+    }
+
+    public int largest() {
+        int largest = this.get(0);
+        for (Integer n : this) {
+            if (n > largest) largest = n;
+        }
+        return largest;
+    }
+
+    public int smallest() {
+        int smallest = this.get(0);
+        for (Integer n : this) {
+            if (n < smallest) smallest = n;
+        }
+        return smallest;
+    }
+
+    public int countOccurences(int x) {
+        int count = 0;
+        for (Integer n : this) {
+            if (Objects.equals(x, n)) count++;
+        }
+        return count;
     }
 }
