@@ -2,7 +2,6 @@ package Days;
 
 import Helpers.InputHandler;
 import Helpers.IntList;
-import Helpers.Stopwatch;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,13 +12,7 @@ public class Day10 {
 
     public static void solve() throws IOException {
         ArrayList<String> input = InputHandler.get("src/Data/Day_10/input.txt");
-        Stopwatch t= new Stopwatch();
-        t.start();
         System.out.println("Day 10: " + oneJDTimesThreeJD(input) + ", " + numberOfArrangements(input));
-        t.stop();
-        t.printTime(1);
-
-        //test(input);
     }
 
     private static int oneJDTimesThreeJD(ArrayList<String> input) {
