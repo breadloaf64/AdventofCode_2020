@@ -1,5 +1,7 @@
 package Helpers;
 
+import java.util.Objects;
+
 public class GridWalker {
     public double x;
     public double y; // negative y is north
@@ -47,10 +49,39 @@ public class GridWalker {
     }
 
     public void rotateAboutOrigin(String direction, double dtheta) {
-        double cmag = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-        double ctheta = Math.toDegrees(Math.atan(y / x));
-        x = Math.round(Math.cos(ctheta + dtheta) * cmag);
-        y = Math.round(Math.sin(ctheta + dtheta) * cmag);
+        double inter;
+        if (dtheta == 180) {
+            x *= -1;
+            y *= -1;
+        }
+        else if (dtheta == 90) {
+            if (Objects.equals(direction, "R")) {
+                turn90R();
+            }
+            else {
+                turn90L();
+            }
+        }
+        else if (dtheta == 270) {
+            if (Objects.equals(direction, "R")) {
+                turn90L();
+            }
+            else {
+                turn90R();
+            }
+        }
+    }
+
+    private void turn90L() {
+        double inter = x;
+        x = y;
+        y = -inter;
+    }
+
+    private void turn90R() {
+        double inter = x;
+        x = -y;
+        y = inter;
     }
 
     public double manhattanDistance() {
