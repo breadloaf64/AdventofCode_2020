@@ -18,12 +18,12 @@ public class Day16 {
         td.discardInvalidNearbyTickets();
         td.createTicketMatrix();
         td.deduceFieldIndex();
-        System.out.println(td.departureProduct());
+        System.out.println("Day 16: " + scanningErrorRate + ", " + td.departureProduct());
     }
 
     static class TicketData {
-        Hashtable<String, ArrayList<Tuple<Integer, Integer>>> fieldRanges = new Hashtable();
-        String myTicket = "";
+        Hashtable<String, ArrayList<Tuple<Integer, Integer>>> fieldRanges = new Hashtable<>();
+        String myTicket;
         ArrayList<String> nearbyTickets = new ArrayList<>();
         Hashtable<String, Integer> fieldIndex = new Hashtable<>();
         int[][] ticketMatrix;
@@ -71,12 +71,11 @@ public class Day16 {
             ArrayList<Tuple<Integer, Integer>> validRanges = new ArrayList<>();
 
             String[] ranges = s.split(" or ");
-            int low = 0;
-            int high = 0;
-            for (int i = 0; i < ranges.length; i++) {
-                low = Integer.parseInt(ranges[i].split("-")[0]);
-                high = Integer.parseInt(ranges[i].split("-")[1]);
-                validRanges.add(new Tuple<Integer, Integer>(low, high));
+            int low, high;
+            for (String range : ranges) {
+                low = Integer.parseInt(range.split("-")[0]);
+                high = Integer.parseInt(range.split("-")[1]);
+                validRanges.add(new Tuple<>(low, high));
             }
 
             return validRanges;
@@ -93,9 +92,9 @@ public class Day16 {
         int scanningErrorTicket(String ticket) {
             int scanningErrorTicket = 0;
             String[] values = ticket.split(",");
-            for (int i = 0; i < values.length; i++) {
-                int value = Integer.parseInt(values[i]);
-                if (!fieldRangesContainValue(value)) scanningErrorTicket+= value;
+            for (String s : values) {
+                int value = Integer.parseInt(s);
+                if (!fieldRangesContainValue(value)) scanningErrorTicket += value;
             }
             return scanningErrorTicket;
         }
@@ -115,18 +114,16 @@ public class Day16 {
         }
 
         void discardInvalidNearbyTickets() {
-            System.out.println(nearbyTickets.size());
             for(int i = nearbyTickets.size() - 1; i >= 0; i--) {
                 if(scanningErrorTicket(nearbyTickets.get(i))> 0) {
                     nearbyTickets.remove(i);
                 }
             }
-            System.out.println(nearbyTickets.size());
         }
 
         void deduceFieldIndex() {
             fieldIndex = new Hashtable<>();
-            ArrayList<Integer> taken = new ArrayList();
+            ArrayList<Integer> taken = new ArrayList<>();
             int index;
             for(String field : fields) {
                 fieldIndex.put(field, -1);
@@ -155,9 +152,9 @@ public class Day16 {
         }
 
         boolean validFieldIndexPair(String field, int index) {
-            for (int i = 0; i < ticketMatrix.length; i++) {
-                int valCheck = ticketMatrix[i][index];
-                if(!rangesContainValue(fieldRanges.get(field), valCheck)) {
+            for (int[] ticket : ticketMatrix) {
+                int valCheck = ticket[index];
+                if (!rangesContainValue(fieldRanges.get(field), valCheck)) {
                     return false;
                 }
             }
