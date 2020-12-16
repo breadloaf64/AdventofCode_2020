@@ -4,39 +4,31 @@ import Helpers.InputHandler;
 import Helpers.Tuple;
 
 import java.io.IOException;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Objects;
 
 public class Day16 {
 
     public static void solve() throws IOException {
-        ArrayList<String> input = InputHandler.get("src/Data/Day_16/test2.txt");
+        ArrayList<String> input = InputHandler.get("src/Data/Day_16/input.txt");
 
         TicketData td = new TicketData(input);
         int scanningErrorRate = td.scanningErrorRate();
         td.discardInvalidNearbyTickets();
         td.createTicketMatrix();
         td.deduceFieldIndex();
-        //test(input);
-    }
-
-
-    private static void test(ArrayList<String> input) {
-
+        System.out.println(td.departureProduct());
     }
 
     static class TicketData {
         Hashtable<String, ArrayList<Tuple<Integer, Integer>>> fieldRanges = new Hashtable();
         String myTicket = "";
         ArrayList<String> nearbyTickets = new ArrayList<>();
-        ArrayList<String> indexFields = new ArrayList<>();
         Hashtable<String, Integer> fieldIndex = new Hashtable<>();
         int[][] ticketMatrix;
         int fieldCount;
-        ArrayList<String> fields;
+        ArrayList<String> fields = new ArrayList<>();
 
         TicketData(ArrayList<String> input) {
             int i = 0;
@@ -123,49 +115,40 @@ public class Day16 {
         }
 
         void discardInvalidNearbyTickets() {
+            System.out.println(nearbyTickets.size());
             for(int i = nearbyTickets.size() - 1; i >= 0; i--) {
                 if(scanningErrorTicket(nearbyTickets.get(i))> 0) {
                     nearbyTickets.remove(i);
                 }
             }
+            System.out.println(nearbyTickets.size());
         }
 
         void deduceFieldIndex() {
-            Hashtable<String, ArrayList<Integer>> possibleIndices = new Hashtable<>();
+            fieldIndex = new Hashtable<>();
+            ArrayList<Integer> taken = new ArrayList();
+            int index;
             for(String field : fields) {
-                possibleIndices.put(field, possibleIndicesForField(field));
+                fieldIndex.put(field, -1);
             }
-            System.out.println();
-            while (!injective(possibleIndices)) {
-                for (int i = 0; i < fieldCount; i++) {
-                    if (possibleIndices.get(fields.get(i)).size() == 1) {
-                        for (String field : fields) {
-                            if (possibleIndices.get(field).size() > 0) {
-                                possibleIndices.get(field).remove(Integer.valueOf(i));
-                            }
-                        }
+            while (taken.size() < fieldCount) {
+                for(String field : fields) {
+                    if (possibleIndicesForField(field, taken).size() == 1) {
+                        index = possibleIndicesForField(field, taken).get(0);
+                        fieldIndex.put(field, index);
+                        taken.add(index);
                     }
                 }
             }
-            System.out.println();
-            fieldIndex = new Hashtable<>();
-            for (String field : fieldRanges.keySet()) {
-                fieldIndex.put(field, possibleIndices.get(field).get(0));
-            }
         }
 
-        boolean injective(Hashtable<String, ArrayList<Integer>> possibleIndices) {
-            for (String field : possibleIndices.keySet()) {
-                if (possibleIndices.get(field).size() != 1) return false;
-            }
-            return true;
-        }
-
-        ArrayList<Integer> possibleIndicesForField(String field) {
+        ArrayList<Integer> possibleIndicesForField(String field, ArrayList<Integer> taken) {
             ArrayList<Integer> possibleIndicesForField = new ArrayList<>();
             for(int index = 0; index < fieldCount; index++) {
-                if (validFieldIndexPair(field, index)) {
-                    possibleIndicesForField.add(index);
+                if (!taken.contains(index)) {
+                    if (validFieldIndexPair(field, index)) {
+                        possibleIndicesForField.add(index);
+                    }
                 }
             }
             return possibleIndicesForField;
@@ -181,5 +164,17 @@ public class Day16 {
             return true;
         }
 
+        long departureProduct() {
+            long product = 1L;
+            int val;
+            String[] mine = myTicket.split(",");
+            for(String field : fields) {
+                if (field.contains("departure")) {
+                    val = Integer.parseInt(mine[fieldIndex.get(field)]);
+                    product *= val;
+                }
+            }
+            return product;
+        }
     }
 }
