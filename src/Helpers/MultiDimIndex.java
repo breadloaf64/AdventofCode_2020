@@ -1,7 +1,6 @@
 package Helpers;
 
 
-//REFACTOR THIS INTO AN INTERFACE AND SEPERATE IMPLEMENTATIONS FOR OVERLAP AND NO OVERLAP
 public class MultiDimIndex {
     int[] i;
     final int LENGTH;
