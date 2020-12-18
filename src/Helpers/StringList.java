@@ -65,6 +65,14 @@ public class StringList {
         return integers;
     }
 
+    public static String reverse(String s) {
+        String reversed = "";
+        for (int i = s.length() - 1; i >= 0; i--) {
+            reversed += s.charAt(i);
+        }
+        return reversed;
+    }
+
     public static LongList toLongList(ArrayList<String> input) {
         LongList longs = new LongList();
         for (String s : input) {
